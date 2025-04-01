@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multi-User Pixel Control</title>
+  <title>pixel</title>
   <style>
     body {
       margin: 0;
@@ -52,12 +52,12 @@
   <div id="stats">Connected users: <span id="userCount">0</span></div>
   <div id="instructions">Use arrow keys to move your pixel. Your pixel will disappear when you close the tab.</div>
   
-  <script src="https://pixel-lxlu.onrender.com/socket.io/socket.io.js"></script>
+  <script src="https://pixelbackend-gimm.onrender.com/socket.io/socket.io.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Connect to the server
-      const socket = io("https://pixel-lxlu.onrender.com");
+      const socket = io("https://pixelbackend-gimm.onrender.com");
       
       const canvas = document.getElementById('canvas');
       const userCountElement = document.getElementById('userCount');

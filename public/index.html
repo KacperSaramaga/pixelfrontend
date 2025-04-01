@@ -31,7 +31,7 @@
       width: 5px;
       height: 5px;
       position: absolute;
-      border-radius: 50%;
+/*       border-radius: 50%; */
     }
     
     #instructions {
@@ -54,114 +54,7 @@
   
   <script src="https://pixelbackend-gimm.onrender.com/socket.io/socket.io.js"></script>
 
-<!--   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Connect to the server
-      const socket = io("https://pixelbackend-gimm.onrender.com");
-      
-      const canvas = document.getElementById('canvas');
-      const userCountElement = document.getElementById('userCount');
-      let myId = null;
-      let myColor = null;
-      const pixels = {};
-      
-      // Focus canvas to capture keyboard events
-      canvas.focus();
-      
-      // Socket event handlers
-      socket.on('initialize', (data) => {
-        myId = data.yourId;
-        myColor = data.yourColor;
-        
-        // Create pixels for all existing users
-        Object.values(data.allUsers).forEach(user => {
-          createPixel(user.id, user.x, user.y, user.color);
-        });
-        
-        updateUserCount();
-      });
-      
-      socket.on('userJoined', (user) => {
-        createPixel(user.id, user.x, user.y, user.color);
-        updateUserCount();
-      });
-      
-      socket.on('updatePosition', (data) => {
-        if (pixels[data.id]) {
-          pixels[data.id].style.left = data.x + 'px';
-          pixels[data.id].style.top = data.y + 'px';
-        }
-      });
-      
-      socket.on('userLeft', (userId) => {
-        removePixel(userId);
-        updateUserCount();
-      });
-      
-      // Handle keyboard events
-      canvas.addEventListener('keydown', function(e) {
-        let direction = null;
-        
-        switch(e.key) {
-          case 'ArrowUp':
-            direction = 'up';
-            break;
-          case 'ArrowDown':
-            direction = 'down';
-            break;
-          case 'ArrowLeft':
-            direction = 'left';
-            break;
-          case 'ArrowRight':
-            direction = 'right';
-            break;
-        }
-        
-        if (direction) {
-          socket.emit('move', direction);
-          e.preventDefault();
-        }
-      });
-      
-      // Handle click to focus
-      canvas.addEventListener('click', function() {
-        canvas.focus();
-      });
-      
-      // Helper functions
-      function createPixel(id, x, y, color) {
-        if (pixels[id]) return;
-        
-        const pixel = document.createElement('div');
-        pixel.className = 'pixel';
-        pixel.style.backgroundColor = color;
-        pixel.style.left = x + 'px';
-        pixel.style.top = y + 'px';
-        
-        Highlight my pixel (make it slightly larger)
-        if (id === myId) {
-          pixel.style.width = '8px';
-          pixel.style.height = '8px';
-          pixel.style.zIndex = '10';
-          pixel.style.border = '1px solid black';
-        }
-        
-        canvas.appendChild(pixel);
-        pixels[id] = pixel;
-      }
-      
-      function removePixel(id) {
-        if (pixels[id]) {
-          canvas.removeChild(pixels[id]);
-          delete pixels[id];
-        }
-      }
-      
-      function updateUserCount() {
-        userCountElement.textContent = Object.keys(pixels).length;
-      }
-    });
-  </script> -->
+
   
   <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -244,13 +137,13 @@
       pixel.style.left = x + 'px';
       pixel.style.top = y + 'px';
       
-      // ✅ Highlight my pixel (Fixed the syntax)
-      if (id === myId) {
-        pixel.style.width = '8px';
-        pixel.style.height = '8px';
-        pixel.style.zIndex = '10';
-        pixel.style.border = '1px solid black';
-      }
+      // // ✅ Highlight my pixel (Fixed the syntax)
+      // if (id === myId) {
+      //   pixel.style.width = '8px';
+      //   pixel.style.height = '8px';
+      //   pixel.style.zIndex = '10';
+      //   pixel.style.border = '1px solid black';
+      // }
       
       canvas.appendChild(pixel);
       pixels[id] = pixel;

@@ -98,29 +98,66 @@
     });
 
     // Handle keyboard events (Fixed: Now listening on document)
+
+    // previous version where users move by 1 px
+    // document.addEventListener('keydown', function(e) {
+    //   let direction = null;
+      
+    //   switch(e.key) {
+    //     case 'ArrowUp':
+    //       direction = 'up';
+    //       break;
+    //     case 'ArrowDown':
+    //       direction = 'down';
+    //       break;
+    //     case 'ArrowLeft':
+    //       direction = 'left';
+    //       break;
+    //     case 'ArrowRight':
+    //       direction = 'right';
+    //       break;
+    //   }
+      
+    //   if (direction) {
+    //     socket.emit('move', direction);
+    //     e.preventDefault();
+    //   }
+    // });
     document.addEventListener('keydown', function(e) {
-      let direction = null;
-      
-      switch(e.key) {
-        case 'ArrowUp':
-          direction = 'up';
-          break;
-        case 'ArrowDown':
-          direction = 'down';
-          break;
-        case 'ArrowLeft':
-          direction = 'left';
-          break;
-        case 'ArrowRight':
-          direction = 'right';
-          break;
+    let direction = null;
+  
+    switch(e.key) {
+      case 'ArrowUp':    direction = 'up'; break;
+      case 'ArrowDown':  direction = 'down'; break;
+      case 'ArrowLeft':  direction = 'left'; break;
+      case 'ArrowRight': direction = 'right'; break;
+    }
+  
+    if (direction) {
+      if (pixels[myId]) { 
+        // Instantly update position locally before server response
+        let pixel = pixels[myId];
+        let step = 5;
+        
+        if (direction === 'up' && parseInt(pixel.style.top) > 0) pixel.style.top = (parseInt(pixel.style.top) - step) + 'px';
+        if (direction === 'down' && parseInt(pixel.style.top) < 395) pixel.style.top = (parseInt(pixel.style.top) + step) + 'px';
+        if (direction === 'left' && parseInt(pixel.style.left) > 0) pixel.style.left = (parseInt(pixel.style.left) - step) + 'px';
+        if (direction === 'right' && parseInt(pixel.style.left) < 395) pixel.style.left = (parseInt(pixel.style.left) + step) + 'px';
       }
+
+     
+
+    socket.emit('move', direction);
+    e.preventDefault();
+    }
       
-      if (direction) {
-        socket.emit('move', direction);
+    //cycle through colors by pressing spacebar
+    if (e.key === ' ') {
+        socket.emit('changeColor');
         e.preventDefault();
-      }
-    });
+    }
+  });
+     
 
     // Handle click to focus (Optional but useful)
     canvas.addEventListener('click', function() {
